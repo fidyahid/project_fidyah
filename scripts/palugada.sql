@@ -3,19 +3,22 @@ CREATE TABLE IF NOT EXISTS user_fidyah (
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   phone_num VARCHAR(255) NOT NULL,
+  total_qty SMALLINT NOT NULL,
+  total_qadha SMALLINT NOT NULL,
+  total_fidyah INT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX ALL_USER_IDX ON user_fidyah (id, name, email, phone_num);
+CREATE INDEX all_user_idx ON user_fidyah (id, name, email, phone_num);
 
-CREATE INDEX ID_NAME_IDX ON user_fidyah (id, name);
+CREATE INDEX id_name_idx ON user_fidyah (id, name);
 
-CREATE INDEX EMAIL_IDX ON user_fidyah (email);
+CREATE INDEX email_idx ON user_fidyah (email);
 
 CREATE TABLE IF NOT EXISTS rate_fidyah (
   id SERIAL PRIMARY KEY,
-  rate INT NOT NULL
+  rate INT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
