@@ -3,10 +3,17 @@ const { client } = require('./connection');
 const { queryInFormatter } = require('../modules/general_function_helper');
 
 const addUserFidyah = async (data) => {
-  const { name, email, phone_num: phoneNum } = data;
+  const {
+    name,
+    email,
+    phone_num: phoneNum,
+    total_qty: qty,
+    total_qadha: qadha,
+    total_fidyah: fidyah
+  } = data;
   const query =
-    'INSERT INTO user_fidyah (name, email, phone_num) VALUES ($1, $2, $3);';
-  const params = [name, email, phoneNum];
+    'INSERT INTO user_fidyah (name, email, phone_num, total_qty, total_qadha, total_fidyah) VALUES ($1, $2, $3, $4, $5, $6);';
+  const params = [name, email, phoneNum, qty, qadha, fidyah];
   return client.query(query, params);
 };
 

@@ -34,7 +34,7 @@ app.all('*', (_, res) => {
     code: 200,
     statustext: 'OK',
     success: true,
-    message: 'Welcome to Fidyah-Ku API!'
+    message: 'Connected, welcome to API Fidyah-Ku.'
   });
 });
 
