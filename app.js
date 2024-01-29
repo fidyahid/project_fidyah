@@ -6,6 +6,8 @@ const Express = require('express');
 
 // Declare other essential packages
 const Cors = require('cors');
+const { caps } = require('./modules/general_function_helper');
+const env = process.env.NODE_ENV || 'development';
 const port = process.env.DEV_PORT || process.env.PROD_PORT;
 
 // Declare app variable to allow in creating other essential functions
@@ -34,7 +36,7 @@ app.all('*', (_, res) => {
     code: 200,
     statustext: 'OK',
     success: true,
-    message: 'Connected, welcome to API Fidyah-Ku.'
+    message: `Connected to env ${caps(env)}. Welcome to API Fidyah-Ku.`
   });
 });
 
