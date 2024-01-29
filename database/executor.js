@@ -57,11 +57,44 @@ const deleteOneOrManyUser = async (data) => {
   return deletedId;
 };
 
+const getSetRate = async (query) => {
+  let params;
+  const { get, secretKey, set } = query;
+
+  let querySelect = 'SELECT rate FROM rate_fidyah where id = 1;';
+  const { rows } = await client.query(querySelect);
+  const [getRate] = rows;
+
+  const isUpdate = get === '0' && typeof +set === 'number';
+  if (isUpdate) {
+    if (secretKey !== process.env.SECRET_KEY_FIDYAH) {
+      throw new Error('Key tidak valid.');
+    }
+
+    let setRate = set < 0 ? set * -1 : +set;
+    let queryUpdate = 'UPDATE rate_fidyah SET rate = $1 WHERE id = 1;';
+    params = [setRate];
+
+    await client.query(queryUpdate, params);
+    return {
+      action: 'set',
+      oldValue: getRate.rate,
+      currentValue: setRate
+    };
+  }
+
+  return {
+    action: 'get',
+    currentValue: getRate.rate
+  };
+};
+
 module.exports = {
   fidyah: {
     addUserFidyah,
     checkUserFidyahByEmail,
     deleteOneOrManyUser,
-    getAllUser
+    getAllUser,
+    getSetRate
   }
 };

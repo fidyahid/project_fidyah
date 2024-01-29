@@ -135,3 +135,24 @@ exports.deleteOneOrManyUserController = async (req, res) => {
     });
   }
 };
+
+exports.getSetRateController = async (req, res) => {
+  try {
+    const query = req.query;
+    const data = await fidyah.getSetRate(query);
+    return res.status(200).send({
+      code: 200,
+      codeMessage: 'OK',
+      success: true,
+      data
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send({
+      code: 400,
+      codeMessage: 'Bad Request',
+      success: false,
+      message: error.message || error.errorMessage || error.errMessage || error
+    });
+  }
+};

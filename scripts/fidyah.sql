@@ -23,4 +23,4 @@ CREATE TABLE IF NOT EXISTS rate_fidyah (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO rate_fidyah (rate) VALUES (15000);
+INSERT INTO rate_fidyah (id, rate) VALUES (1, 15000);
