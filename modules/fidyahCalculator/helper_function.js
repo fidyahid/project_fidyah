@@ -3,12 +3,13 @@ const {
   formatNumber,
   toInt
 } = require('../general_function_helper');
+const { fidyah } = require('../../database/executor');
 const currency = process.env.FIDYAH_CURRENCY;
 
 const errorMessage =
   "Input 'year' tidak bisa melebihi tahun di waktu sekarang.";
 
-exports.calculateFidyah = async (rate, req) => {
+exports.calculateFidyah = async (req) => {
   /**
    * If the year is same with the current year, quantity is one.
    * If the year is minus one from the current year, quantity is one.
@@ -17,13 +18,15 @@ exports.calculateFidyah = async (rate, req) => {
 
   const { body, query } = req;
 
+  const rate = await fidyah.getRate();
+
   let calculateOldOrIllFidyah = +query.oldill;
 
   toInt(rate);
   let fidyahPaid = 0;
   let multiplier;
   let addition;
-  let quantity;
+  let quantity = 0;
   let yearDiff;
 
   const idnTime = new Date().toLocaleString('en-US', {
@@ -43,9 +46,9 @@ exports.calculateFidyah = async (rate, req) => {
 
       if (yearDiff < 0) throw errorMessage;
 
-      quantity = days;
       multiplier = yearDiff === 0 ? 1 : yearDiff;
-      addition = +(multiplier * quantity * rate).toFixed(2);
+      quantity += multiplier * days;
+      addition = +(multiplier * days * rate).toFixed(2);
       fidyahPaid += addition;
     }
   } else {
@@ -59,9 +62,9 @@ exports.calculateFidyah = async (rate, req) => {
 
       if (yearDiff < 0) throw errorMessage;
 
-      quantity = days;
+      quantity += days;
       multiplier = 1;
-      addition = +(multiplier * quantity * rate).toFixed(2);
+      addition = +(multiplier * days * rate).toFixed(2);
       fidyahPaid += addition;
     }
   }
@@ -85,5 +88,5 @@ exports.calculateFidyah = async (rate, req) => {
     qadhaPuasa = body.reduce((a, b) => a + b.days, 0);
   }
 
-  return { bayarFidyah, qadhaPuasa, qty: multiplier * quantity };
+  return [rate, { bayarFidyah, qadhaPuasa, qty: quantity }];
 };

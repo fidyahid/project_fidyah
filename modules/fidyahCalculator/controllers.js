@@ -6,17 +6,16 @@ const {
 } = require('../general_function_helper');
 const { fidyah } = require('../../database/executor');
 
-const rate = process.env.FIDYAH_RATE;
-
 exports.fidyahController = async (req, res) => {
   try {
-    const data = await calculateFidyah(rate, req);
+    const [rate, data] = await calculateFidyah(req);
 
     return res.status(200).send({
       code: 200,
       codeMessage: 'OK',
       success: true,
       message: 'Di bawah ini adalah total fidyah yang harus kamu bayarkan.',
+      rate,
       totalBayar: data
     });
   } catch (error) {

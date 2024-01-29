@@ -79,7 +79,7 @@ const getSetRate = async (query) => {
     return {
       action: 'set',
       oldValue: getRate.rate,
-      currentValue: setRate
+      currentValue: setRate.toString()
     };
   }
 
@@ -89,12 +89,20 @@ const getSetRate = async (query) => {
   };
 };
 
+const getRate = async () => {
+  let query = 'SELECT rate FROM rate_fidyah where id = 1;';
+  const { rows } = await client.query(query);
+  const [getRate] = rows;
+  return getRate.rate;
+};
+
 module.exports = {
   fidyah: {
     addUserFidyah,
     checkUserFidyahByEmail,
     deleteOneOrManyUser,
     getAllUser,
+    getRate,
     getSetRate
   }
 };
