@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the Fidyah Project App! This app is designed to make it easy for users to fulfill your obligations related to Fidyah and Kaffara in Islam. Whether you've missed a fast during Ramadan or need to make up for it, this app provides a convenient way to contribute donations of money to help those in need.
+Welcome to the Fidyah Project App! This app is designed to make it easy for users to fulfill the obligations related to Fidyah and Kaffara in Islam. Whether you've missed a fast during Ramadan or need to make up for it, this app provides a convenient way to contribute donations of money to help those in need.
 
 ## Features
 
