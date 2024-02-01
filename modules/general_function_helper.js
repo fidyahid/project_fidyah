@@ -24,9 +24,9 @@ const validateUserFidyah = (object) => {
     name: Joi.string().min(3).max(115).required(),
     email: Joi.string().email().required(),
     phone_num: Joi.string().min(5).max(15).required(),
-    total_qty: Joi.number().min(0).max(9999),
-    total_qadha: Joi.number().min(0).max(9999),
-    total_fidyah: Joi.number().min(0).max(999999999)
+    total_qty: Joi.string().min(1).max(7).required(),
+    total_qadha: Joi.string().min(1).max(7).required(),
+    total_fidyah: Joi.string().min(1).max(9).required()
   });
 
   const isNotValid = schema.validate(object).error;
