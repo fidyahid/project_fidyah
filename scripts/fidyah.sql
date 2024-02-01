@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS user_fidyah (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE user_fidyah ALTER COLUMN total_fidyah TYPE VARCHAR(15);
+
 CREATE INDEX all_user_idx ON user_fidyah (id, name, email, phone_num);
 
 CREATE INDEX id_name_idx ON user_fidyah (id, name);
@@ -24,3 +26,5 @@ CREATE TABLE IF NOT EXISTS rate_fidyah (
 );
 
 INSERT INTO rate_fidyah (id, rate) VALUES (1, 15000);
+
+ALTER TABLE rate_fidyah ALTER COLUMN rate TYPE VARCHAR(15);
