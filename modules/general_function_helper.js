@@ -11,11 +11,17 @@ const caps = (string) =>
     .toLowerCase()
     .replace(regexGetFirstLetter, (caps) => caps.toUpperCase());
 
+const nameErrorMessage =
+  'Cek kembali nama anda. Nama terdiri dari 3 - 115 huruf.';
+
+const emailErrorMessage = 'Format email salah, cek kembali email anda.';
+
+const phoneNumErrorMessage =
+  'Format nomor telpon salah. Harus terdiri dari 5 - 15 angka.';
+
 const errorMessageSimplifier = (error) => {
   const detailErr = error.message;
-  if (detailErr.includes('/^[a-zA-Zs]{3,50}$/')) return nameErrorMessage;
   if (detailErr.includes('must be a valid email')) return emailErrorMessage;
-  if (detailErr.includes('/^[0-9]{9,13}$/')) return phoneNumErrorMessage;
   return detailErr;
 };
 

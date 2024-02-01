@@ -31,7 +31,6 @@ exports.fidyahController = async (req, res) => {
 
 exports.tambahUserController = async (req, res) => {
   try {
-    let message;
     const payload = req.body;
     const { email } = payload;
 
@@ -39,13 +38,8 @@ exports.tambahUserController = async (req, res) => {
 
     const isEmailExist = await fidyah.checkUserFidyahByEmail(payload);
 
-    if (!isEmailExist) {
-      await fidyah.addUserFidyah(payload);
-      message =
-        'User baru pada module kalkulator fidyah berhasil ditambahkan. Silakan lanjut';
-    } else {
-      message = `User dengan email ${email} sudah ada di database. Silakan lanjut.`;
-    }
+    await fidyah.addUserFidyah(payload);
+    const message = 'Data user fidyah berhasil ditambahkan. Silakan lanjut';
 
     return res.status(200).send({
       code: 200,
