@@ -32,7 +32,7 @@ const getAllUser = async (data, order = 'DESC') => {
   const offset = limit * (page - 1);
 
   let query =
-    'SELECT * FROM user_fidyah ORDER BY created_at ? LIMIT $1 OFFSET $2;';
+    'SELECT id, name, email, phone_num FROM user_fidyah ORDER BY updated_at ? LIMIT $1 OFFSET $2;';
 
   order = orderBy;
   if (order === 'DESC' || 'ASC') query = query.replace('?', order);

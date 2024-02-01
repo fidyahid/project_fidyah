@@ -21,13 +21,9 @@ const errorMessageSimplifier = (error) => {
 
 const validateUserFidyah = (object) => {
   const schema = Joi.object({
-    name: Joi.string()
-      .pattern(/^[a-zA-Z\s]{3,50}$/)
-      .required(),
+    name: Joi.string().min(3).max(115).required(),
     email: Joi.string().email().required(),
-    phone_num: Joi.string()
-      .pattern(/^[0-9]{9,13}$/)
-      .required(),
+    phone_num: Joi.string().min(5).max(15).required(),
     total_qty: Joi.number().min(0).max(9999),
     total_qadha: Joi.number().min(0).max(9999),
     total_fidyah: Joi.number().min(0).max(999999999)
