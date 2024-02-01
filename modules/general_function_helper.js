@@ -34,7 +34,7 @@ const validateUserFidyah = (object) => {
   if (isNotValid) throw new Error(errorMessageSimplifier(isNotValid));
   return true;
 };
-
+//
 const queryInFormatter = (query) => `${query.replace(/\,/g, ', ')}`;
 
 const getIdnYear = (time) => {
