@@ -32,11 +32,8 @@ exports.fidyahController = async (req, res) => {
 exports.tambahUserController = async (req, res) => {
   try {
     const payload = req.body;
-    const { email } = payload;
 
     validateUserFidyah(payload);
-
-    const isEmailExist = await fidyah.checkUserFidyahByEmail(payload);
 
     await fidyah.addUserFidyah(payload);
     const message = 'Data user fidyah berhasil ditambahkan. Silakan lanjut';
